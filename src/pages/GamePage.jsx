@@ -56,7 +56,7 @@ function HomeScreen({ onStart }) {
 
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: 3, color: C.accent }}>
-            THREAT STRANDS
+            TCCO STRANDS
           </div>
           <div style={{ fontSize: 13, color: C.muted, marginTop: 6, letterSpacing: 1 }}>
             Technology Risk Edition
@@ -322,7 +322,7 @@ function GameBoard({ username, onWin }) {
                     alignItems: 'center', justifyContent: 'space-between', padding: '0 4px' }}>
         <div>
           <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: 2, color: C.accent }}>
-            THREAT STRANDS
+            TCCO STRANDS
           </div>
           <div style={{ fontSize: 12, color: C.muted }}>{username}</div>
         </div>
