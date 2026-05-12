@@ -66,7 +66,7 @@ useEffect(() => {
               LEADERBOARD
             </div>
             <div style={{ fontSize: 12, color: C.muted }}>
-              Threat Strands · Technology Risk Edition
+              TCCO Strands · Technology Risk Edition
             </div>
           </div>
         </div>
@@ -157,7 +157,7 @@ useEffect(() => {
         )}
 
         <div style={{ textAlign: 'center', marginTop: '1.25rem', fontSize: 12, color: C.faint }}>
-          Best score per player · personal best only
+          Best score per player
         </div>
       </div>
     </div>
