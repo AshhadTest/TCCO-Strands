@@ -1,18 +1,3 @@
-// ─── Grid ────────────────────────────────────────────────────────────────────
-// 10×10. COMPLIANCE diagonal corner-to-corner (spangram).
-//
-// Word map (admin only — remove before sharing source):
-//   Row 0  cols 1-8  PHISHING   horizontal
-//   Row 1  cols 2-4  MFA        horizontal  ← short, near-top
-//   Col 9  rows 1-7  MALWARE    vertical
-//   Row 2  cols 3-8  THREAT     horizontal
-//   Col 1  rows 2-7  BREACH     vertical    ← was horizontal, now vertical
-//   Row 4  cols 5-7  SSO        horizontal  ← short, centre-right
-//   Row 6  cols 2-4  VPN        horizontal  ← short, lower-centre
-//   Row 8  cols 0-6  EXPLOIT    horizontal
-//   Row 9  cols 1-8  FIREWALL   horizontal
-//   Diagonal (0,0)→(9,9)  COMPLIANCE  spangram
-// ─────────────────────────────────────────────────────────────────────────────
 export const GRID = [
   ['C','P','H','I','S','H','I','N','G','V'],
   ['K','O','M','F','A','B','Z','Q','J','M'],
