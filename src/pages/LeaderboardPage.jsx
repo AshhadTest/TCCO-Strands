@@ -157,7 +157,7 @@ useEffect(() => {
         )}
 
         <div style={{ textAlign: 'center', marginTop: '1.25rem', fontSize: 12, color: C.faint }}>
-          Best score per player
+          Best score per player · personal best only
         </div>
       </div>
     </div>
