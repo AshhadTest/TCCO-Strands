@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useNavigate }                        from 'react-router-dom';
 import { GRID, ANSWERS, TOTAL, THEME_TOTAL, SPANGRAM_ID,
          decodeName, sha256, fmt, effSc, isAdj }    from '../data.js';
-import { saveScore }                                from '../firebase.js';
+import { saveScore, registerPlayer }                from '../firebase.js';
 
 // ─── Colours ─────────────────────────────────────────────────────────────────
 const C = {
@@ -446,7 +446,11 @@ export default function GamePage() {
   const [username, setUsername] = useState(prior?.username || '');
   const [result,   setResult]   = useState(prior);
 
-  const handleStart = name => { setUsername(name); setScreen('game'); };
+  const handleStart = name => {
+  setUsername(name);
+  setScreen('game');
+  registerPlayer(name).catch(() => {});
+};
 
   const handleWin = (time, hints) => {
     const r = { time, hints, username };
