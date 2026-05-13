@@ -53,3 +53,17 @@ export const subscribeLeaderboard = (callback) => {
   });
   return unsubscribe;
 };
+export const registerPlayer = async (username) => {
+  try {
+    await set(ref(db, `players/${safeKey(username)}`), {
+      username: username.trim(),
+      startedAt: Date.now(),
+    });
+  } catch {}
+};
+
+export const subscribePlayerCount = (callback) => {
+  return onValue(ref(db, 'players'), (snap) => {
+    callback(snap.exists() ? Object.keys(snap.val()).length : 0);
+  });
+};
