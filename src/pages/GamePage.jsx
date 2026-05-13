@@ -152,10 +152,9 @@ function WonScreen({ username, time, hints, onPlayAgain }) {
         </div>
 
         <div style={{ display: 'flex', gap: 10 }}>
-          <button className="primary" onClick={() => navigate('/leaderboard')} style={{ flex: 1 }}>
+          <button className="primary" onClick={() => navigate('/leaderboard')} style={{ width: '100%' }}>
             Leaderboard
           </button>
-          <button onClick={onPlayAgain} style={{ flex: 1 }}>Play again</button>
         </div>
 
       </div>
@@ -440,15 +439,23 @@ function GameBoard({ username, onWin }) {
 // PAGE CONTROLLER
 // ─────────────────────────────────────────────────────────────────────────────
 export default function GamePage() {
-  const [screen,   setScreen]   = useState('home');
-  const [username, setUsername] = useState('');
-  const [result,   setResult]   = useState(null);
+  const stored  = localStorage.getItem('tcco_done');
+  const prior   = stored ? JSON.parse(stored) : null;
+
+  const [screen,   setScreen]   = useState(prior ? 'won' : 'home');
+  const [username, setUsername] = useState(prior?.username || '');
+  const [result,   setResult]   = useState(prior);
 
   const handleStart = name => { setUsername(name); setScreen('game'); };
-  const handleWin   = (time, hints) => { setResult({ time, hints }); setScreen('won'); };
-  const handleAgain = () => { setResult(null); setScreen('home'); };
+
+  const handleWin = (time, hints) => {
+    const r = { time, hints, username };
+    localStorage.setItem('tcco_done', JSON.stringify(r));
+    setResult(r);
+    setScreen('won');
+  };
 
   if (screen === 'home') return <HomeScreen onStart={handleStart} />;
-  if (screen === 'won')  return <WonScreen username={username} time={result.time} hints={result.hints} onPlayAgain={handleAgain} />;
+  if (screen === 'won')  return <WonScreen username={username} time={result.time} hints={result.hints} onPlayAgain={null} />;
   return <GameBoard key={username} username={username} onWin={handleWin} />;
 }
