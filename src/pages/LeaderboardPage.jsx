@@ -1,6 +1,6 @@
 import { useState, useEffect }        from 'react';
 import { Link }                        from 'react-router-dom';
-import { subscribeLeaderboard }        from '../firebase.js';
+import { subscribeLeaderboard, subscribePlayerCount }        from '../firebase.js';
 import { fmt, effSc }                  from '../data.js';
 
 const C = {
@@ -25,6 +25,7 @@ export default function LeaderboardPage() {
   const [rows,    setRows]    = useState([]);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState('');
+  const [playerCount, setPlayerCount] = useState(0);
 
 useEffect(() => {
   let unsub;
@@ -47,6 +48,11 @@ useEffect(() => {
   }
 
   return () => { clearTimeout(timeout); if (unsub) unsub(); };
+}, []);
+  
+useEffect(() => {
+  const unsub = subscribePlayerCount(setPlayerCount);
+  return () => unsub();
 }, []);
 
   const rankColor = i =>
@@ -73,9 +79,14 @@ useEffect(() => {
 
         {/* ── Legend ── */}
         <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10,
-                      padding: '10px 16px', marginBottom: '1rem', fontSize: 12, color: C.muted }}>
-          Ranked by completion time. Each hint used adds 30 s to your score.
-          Live updates every time a player finishes.
+              padding: '10px 16px', marginBottom: '1rem', display: 'flex',
+              justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: 12, color: C.muted }}>
+          Ranked by completion time. Each hint adds 30 s.
+          </span>
+          <span style={{ fontSize: 13, fontWeight: 700, color: C.accent }}>
+            {playerCount} {playerCount === 1 ? 'player' : 'players'} joined
+          </span>
         </div>
 
         {/* ── Table ── */}
